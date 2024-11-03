@@ -1,17 +1,17 @@
 import { useState } from "react"
 
 
-export default function Player({initialName , symbol , isActive}) {
+export default function Player({initialName , symbol , isActive , onChangeName}) {
     const [ isEditing , setIsEditing ] = useState(false);
     const [ playerName , setPlayerName ] = useState(initialName);
 
     // for updating state based on previous sate you should noy directly change state rather you should pass a funxction
     function handleEditClick(){
-        // setIsEditing(!isEditing);  // schedules a state update to true
-        // setIsEditing(!isEditing);  // schedules a state update to true
-        // // Both the statements have same isEditing input not different 
-
         setIsEditing((editing) => !editing);
+        if(isEditing) {
+            onChangeName(symbol , playerName)
+        }
+       
     }
 
     function handleChange(event) {
